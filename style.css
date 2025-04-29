@@ -76,23 +76,18 @@ header{
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 12px;
+    padding: 6px;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 6px;
     position: fixed;
     overflow: hidden;
     top: 0px;
     z-index: 12;
-    background-color: white;
-    box-shadow: 0px 0px 10px rgba(118, 31, 177, 0.986);
-    border-bottom-right-radius: 124px;
-    border-bottom-left-radius: 124px;
+   background-color: rgba(255, 255, 255, 0.959);
 }
 
 .logo{
-    width: 130px;
-    position: absolute;
-    left: 15%;
+    width: 50px;
      a{
         width: 120px;
 
@@ -696,7 +691,7 @@ video{
         padding: 0px 12px;
         font-size: 13px;
         font-weight: 400;
-        background: linear-gradient(170deg, #0284c8, #04548d);
+        background: linear-gradient(170deg, #663099, #A255E2);
         color: #ffffff;
         border-top-right-radius: 0px;
         border-top-left-radius: 0px;
@@ -807,7 +802,7 @@ footer{
     align-content: center;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(170deg, #0284c8, #04548d);
+    background: linear-gradient(170deg, #663099, #A255E2);
     color: white;
     padding: 16px;
     border-radius: 36px 36px 0px 0px;
@@ -1260,7 +1255,7 @@ footer{
         display: none;
     }
     .logo{
-        width: 120px;
+        width: 50px;
         position: absolute;
         left: 5%;
          a{
@@ -1279,7 +1274,6 @@ footer{
 
     header{
         min-height: 75vh;
-        background-position: -310px 30px;
         background-attachment: initial;
 
         .wrapper{
@@ -1557,7 +1551,7 @@ footer{
         display: none;
     }
     .logo{
-        width: 120px;
+        width: 50px;
         position: absolute;
         left: 5%;
          a{
@@ -1576,7 +1570,6 @@ footer{
 
     header{
         min-height: 75vh;
-        background-position: -210px 30px;
         background-attachment: initial;
 
         .wrapper{
