@@ -78,20 +78,19 @@
       </div>
     </section>
 
-    <section class="video aos-init aos-animate" data-aos="fade-up">
+    <section class="video" data-aos="fade-up">
       <h2>Conoce algunos de nuestros productos</h2>
       <div class="wrapper">
-        <div class="video-item2">
-          <video controls>
-              <source src="https://renovexenlinea.com/wp-content/uploads/2025/04/WhatsApp-Video-2025-04-29-at-14.21.43.mp4" type="video/mp4">
-              Tu navegador no soporta el formato de video.
-          </video>
-        </div>
-        <div class="video-item">
-          <video controls>
-              <source src="https://renovexenlinea.com/wp-content/uploads/2025/04/WhatsApp-Video-2025-04-29-at-14.21.39.mp4" type="video/mp4">
-              Tu navegador no soporta el formato de video.
-          </video>
+        <div class="videoCarousel-container">
+          <button class="prev" onclick="scrollCarousel(-1)">❮</button>
+          <div class="videoCarousel" id="videoCarousel">
+            <div class="video-item"><video controls><source src="https://renovexenlinea.com/wp-content/uploads/2025/04/WhatsApp-Video-2025-04-29-at-14.21.43.mp4" type="video/mp4"></video></div>
+            <div class="video-item"><video controls><source src="https://renovexenlinea.com/wp-content/uploads/2025/04/WhatsApp-Video-2025-04-29-at-14.21.39.mp4" type="video/mp4"></video></div>
+            <div class="video-item"><video controls><source src="https://renovexenlinea.com/wp-content/uploads/2025/04/WhatsApp-Video-2025-04-29-at-14.21.43.mp4" type="video/mp4"></video></div>
+            <div class="video-item"><video controls><source src="https://renovexenlinea.com/wp-content/uploads/2025/04/WhatsApp-Video-2025-04-29-at-14.21.39.mp4" type="video/mp4"></video></div>
+            <!-- Puedes agregar más videos aquí -->
+          </div>
+          <button class="next" onclick="scrollCarousel(1)">❯</button>
         </div>
         <div class="imagensolo-pc">
           <img src="https://renovexenlinea.com/wp-content/uploads/2025/04/mujer-joven-apuntando-caja-carton-camiseta-pantalones-cortos-mirando-contento-vista-frontal-e1745953916379.png" alt="Envíos en Colombia">
@@ -178,6 +177,106 @@ function cerrarMenu(){
   document.getElementById('navegacion-movil').style.right='-50%';
   document.getElementById('navegacion-movil').style.opacity='0';
 }
+
+
+const carousel = document.getElementById('videoCarousel');
+  const videos = carousel.querySelectorAll('video');
+  let autoScrollInterval;
+  let isDragging = false;
+  let startX;
+  let scrollLeft;
+  let currentIndex = 0;
+
+  function scrollCarousel(direction) {
+    const items = carousel.querySelectorAll('.video-item');
+    const itemWidth = items[0].offsetWidth + 16;
+    const visibleCount = Math.round(carousel.offsetWidth / itemWidth);
+    const maxIndex = items.length - visibleCount;
+
+    currentIndex += direction;
+
+    if (currentIndex > maxIndex) {
+      currentIndex = 0;
+    } else if (currentIndex < 0) {
+      currentIndex = maxIndex;
+    }
+
+    carousel.scrollTo({ left: currentIndex * itemWidth, behavior: 'smooth' });
+
+    setTimeout(() => {
+      videos.forEach(video => {
+        const rect = video.getBoundingClientRect();
+        const isVisible = rect.left >= 0 && rect.right <= window.innerWidth;
+        if (!isVisible) {
+          video.pause();
+          video.currentTime = 0;
+        }
+      });
+    }, 600);
+  }
+
+  function startAutoScroll() {
+    autoScrollInterval = setInterval(() => {
+      scrollCarousel(1);
+    }, 5000);
+  }
+
+  function stopAutoScroll() {
+    clearInterval(autoScrollInterval);
+  }
+
+  // Pausar al interactuar
+  videos.forEach(video => {
+    ['play', 'touchstart', 'mouseenter'].forEach(evt => video.addEventListener(evt, stopAutoScroll));
+    ['pause', 'mouseleave'].forEach(evt => video.addEventListener(evt, startAutoScroll));
+  });
+
+  // Soporte para swipe táctil y mouse drag
+  carousel.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    startX = e.pageX - carousel.offsetLeft;
+    scrollLeft = carousel.scrollLeft;
+    stopAutoScroll();
+  });
+
+  carousel.addEventListener('mouseleave', () => {
+    isDragging = false;
+    startAutoScroll();
+  });
+
+  carousel.addEventListener('mouseup', () => {
+    isDragging = false;
+    startAutoScroll();
+  });
+
+  carousel.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    const x = e.pageX - carousel.offsetLeft;
+    const walk = (x - startX) * 1.2; // factor de arrastre
+    carousel.scrollLeft = scrollLeft - walk;
+  });
+
+  carousel.addEventListener('touchstart', (e) => {
+    isDragging = true;
+    startX = e.touches[0].pageX - carousel.offsetLeft;
+    scrollLeft = carousel.scrollLeft;
+    stopAutoScroll();
+  });
+
+  carousel.addEventListener('touchend', () => {
+    isDragging = false;
+    startAutoScroll();
+  });
+
+  carousel.addEventListener('touchmove', (e) => {
+    if (!isDragging) return;
+    const x = e.touches[0].pageX - carousel.offsetLeft;
+    const walk = (x - startX) * 1.2;
+    carousel.scrollLeft = scrollLeft - walk;
+  });
+
+  startAutoScroll();
   </script>
 </body>
 </html>
