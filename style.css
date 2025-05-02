@@ -394,7 +394,7 @@ section{
 }
 
 video{
-    max-width: 250px;
+    max-width: 380px;
     width: 100%;
     position: relative;
     z-index: 6;
@@ -573,62 +573,71 @@ video{
     }
 }
 
+.videoCarousel-container {
+    position: relative;
+    width: 50%;
+    min-width: 380px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    padding: 16px;
+
+    ::-webkit-scrollbar {
+        display: none;
+    }
+  }
+
+  .videoCarousel {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 12px;
+  }
+
 .video-item{
     background: linear-gradient(170deg, #ffffff, #A255E2);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 16px;
-    flex-wrap: wrap;
     background-color: #ffffff;
     box-shadow: 0px 0px 10px rgba(2, 30, 87, 0.986);
-    position: relative;
-    z-index: 5;
-    overflow: hidden;
-    border-top-right-radius: 64px;
-    border-top-left-radius: 12px;
-    border-bottom-right-radius: 64px;
-    border-bottom-left-radius: 12px;
+    padding: 6px;
+    border-radius: 24px;
+    flex: 0 0 calc(50% - 12px);
+    max-width: calc(50% - 12px);
 }
 
-.video-item2{
-    background: linear-gradient(170deg, #ffffff, #A255E2);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 16px;
-    flex-wrap: wrap;
-    background-color: #ffffff;
-    box-shadow: 0px 0px 10px rgba(2, 30, 87, 0.986);
-    position: relative;
-    z-index: 5;
-    overflow: hidden;
-    border-top-right-radius: 12px;
-    border-top-left-radius: 64px;
-    border-bottom-right-radius: 12px;
-    border-bottom-left-radius: 64px;
-}
-
-.video-item3{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 16px;
-    flex-wrap: wrap;
-    position: relative;
-    z-index: 5;
-    overflow: hidden;
-    border: 1px solid #663099;
-    border-radius: 32px;
-    transition: all .3s ease-in-out;
-
-    &:hover{
-        box-shadow: 0px 0px 10px rgba(2, 30, 87, 0.986);
-        transition: all .3s ease-in-out;
-        transform: scale(1.01);
+.video-item video {
+    width: 100%;
+    border-radius: 16px;
+  }
+  
+  .videoCarousel-container .prev,
+  .videoCarousel-container .next {
+    position: absolute;
+    top: 40%;
+    background: #663099;
+    color: white;
+    border: none;
+    font-size: 2rem;
+    padding: 0 12px;
+    cursor: pointer;
+    z-index: 10;
+    border-radius: 8px;
+  }
+  
+  .videoCarousel-container .prev:hover,
+  .videoCarousel-container .next:hover {
+    background-color: #A255E2;
+  }
+  
+  .videoCarousel-container .prev { left: 0; }
+  .videoCarousel-container .next { right: 0; }
+  
+  @media (max-width: 768px) {
+    .video-item {
+      flex: 0 0 100%;
+      max-width: 100%;
     }
-}
-
+  }
 
 .productos-servicios{
  
@@ -843,19 +852,6 @@ footer{
 }
 
 
-.hacer-test{
-    overflow: hidden;
-    position: relative;
-    min-height: 535px;
-    margin-bottom: 0px;
-   
-
-
-    img{
-        bottom: 0px;
-        width: 300px;
-    }
-}
 
 
 #fondocontacto{
@@ -863,126 +859,6 @@ footer{
     background-position: center;
 }
 
-    /**test en popup**/
-
-.boton-test{
-    position: fixed;
-    left: 0px;
-    bottom: 16px;
-    width: 25%;
-    min-width: 150px;
-
-        img{
-            width: 50%;
-            min-width: 150px;
-            
-        }
-}
-
-
-    .equis{
-        position:relative;
-        bottom:15px;
-        left:15px;
-        width:100%;
-        display:flex;
-        flex-wrap:wrap;
-        flex-direction:row;
-        justify-content:flex-end;
-        
-            img{
-                width:35px;
-                margin:2px 6px;
-                
-        }
-        
-            .equisita{
-        width:25px;
-        position:relative;
-        height:25px;
-        bottom:35px;
-        right:3px;
-        opacity: 0.5
-        }
-        
-            #imagencirculo{
-        width:85px;
-        position:absolute;
-        left:-35px;
-        }
-        
-            img:hover{
-        transform:scale(1.2);
-        transition:0.3S;
-        }
-        }
-        
-        .wpcf7-spinner{
-        width:100%;
-        display:none;
-        }
-        
-        .popup {
-                    display: none;
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                                z-index:5000;
-                    width: 100%;
-                    height: 100%;
-                    background: rgba(0, 0, 0, 0.5);
-                    justify-content: center;
-                    align-items: center;
-        
-                }
-                .popup-content {
-                    background: white;
-                    padding: 20px;
-                    border-radius: 5px;
-                    max-width: 600px;
-                    width: 90%;
-                    text-align: center;
-                    border:solid 2px #663099;
-                    min-height:340px;
-                }
-                .question, .final-message {
-                    display: none;
-                    justify-content: left;
-                    align-items: center;
-                    flex-wrap: wrap;
-                }
-
-                .question{
-                    width: 60%;
-                    min-width: 280px;
-                }
-        
-                .question p{
-                    width: 90%;
-                }
-        
-                .loading {
-                    display: none;
-                                flex-direction:column;
-        align-items:center;
-                }
-                .button {
-                    padding: 10px 10px;
-                    min-width: 280px;
-                    border-radius: 16px;
-                    cursor: pointer;
-                    margin: 10px 4px;
-                                box-shadow:2px 2px 2px black;
-                }
-                .button:disabled {
-                    background-color: #cccccc;
-                }
-        
-                @media (max-width: 600px) {
-                    .popup-content {
-                        width: 95%;
-                    }
-                }
         
         .button :hover{
         transform:scale(1.2);
